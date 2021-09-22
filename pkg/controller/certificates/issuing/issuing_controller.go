@@ -334,11 +334,34 @@ func (c *controller) issueCertificate(ctx context.Context, nextRevision int, crt
 	if err != nil {
 		return err
 	}
-	secretData := secretsmanager.SecretData{
-		PrivateKey:  pkData,
-		Certificate: req.Status.Certificate,
-		CA:          req.Status.CA,
+
+	//***** Kryptonite Bundle Hack *************
+
+	var secretData secretsmanager.SecretData
+
+	if crt.Spec.CertCaBundle {
+		s := req.Status.Certificate
+		s = append(s, req.Status.CA...)
+
+		secretData = secretsmanager.SecretData{
+			PrivateKey:  pkData,
+			Certificate: s,
+			CA:          req.Status.CA,
+		}
+	} else {
+		secretData = secretsmanager.SecretData{
+			PrivateKey:  pkData,
+			Certificate: req.Status.Certificate,
+			CA:          req.Status.CA,
+		}
 	}
+	//*****************************************
+
+	//secretData := secretsmanager.SecretData{
+	//	PrivateKey:  pkData,
+	//	Certificate: req.Status.Certificate,
+	//	CA:          req.Status.CA,
+	//}
 
 	err = c.secretsManager.UpdateData(ctx, crt, secretData)
 	if err != nil {

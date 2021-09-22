@@ -160,6 +160,10 @@ type CertificateSpec struct {
 	// +optional
 	IsCA bool `json:"isCA,omitempty"`
 
+	// certCaBundle will produce tls.crt + CA.crt in one tls.crt bundle.
+	// +optional
+	CertCaBundle bool `json:"certCaBundle,omitempty"`
+
 	// Usages is the set of x509 usages that are requested for the certificate.
 	// Defaults to `digital signature` and `key encipherment` if not specified.
 	// +optional

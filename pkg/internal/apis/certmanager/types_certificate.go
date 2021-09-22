@@ -146,6 +146,9 @@ type CertificateSpec struct {
 	// This will automatically add the `cert sign` usage to the list of `usages`.
 	IsCA bool
 
+	// certCaBundle will produce Certificate + CA.crt in one bundle.
+	CertCaBundle bool
+
 	// Usages is the set of x509 usages that are requested for the certificate.
 	// Defaults to `digital signature` and `key encipherment` if not specified.
 	Usages []KeyUsage

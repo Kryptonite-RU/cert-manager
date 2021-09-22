@@ -789,6 +789,7 @@ func autoConvert_v1alpha2_CertificateSpec_To_certmanager_CertificateSpec(in *v1a
 		return err
 	}
 	out.IsCA = in.IsCA
+	out.CertCaBundle = in.CertCaBundle
 	out.Usages = *(*[]certmanager.KeyUsage)(unsafe.Pointer(&in.Usages))
 	// WARNING: in.KeySize requires manual conversion: does not exist in peer-type
 	// WARNING: in.KeyAlgorithm requires manual conversion: does not exist in peer-type
@@ -839,6 +840,7 @@ func autoConvert_certmanager_CertificateSpec_To_v1alpha2_CertificateSpec(in *cer
 		return err
 	}
 	out.IsCA = in.IsCA
+	out.CertCaBundle = in.CertCaBundle
 	out.Usages = *(*[]v1alpha2.KeyUsage)(unsafe.Pointer(&in.Usages))
 	if in.PrivateKey != nil {
 		in, out := &in.PrivateKey, &out.PrivateKey

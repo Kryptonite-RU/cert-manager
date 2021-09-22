@@ -798,6 +798,7 @@ func autoConvert_v1_CertificateSpec_To_certmanager_CertificateSpec(in *v1.Certif
 		return err
 	}
 	out.IsCA = in.IsCA
+	out.CertCaBundle = in.CertCaBundle
 	out.Usages = *(*[]certmanager.KeyUsage)(unsafe.Pointer(&in.Usages))
 	out.PrivateKey = (*certmanager.CertificatePrivateKey)(unsafe.Pointer(in.PrivateKey))
 	out.EncodeUsagesInRequest = (*bool)(unsafe.Pointer(in.EncodeUsagesInRequest))
@@ -829,6 +830,7 @@ func autoConvert_certmanager_CertificateSpec_To_v1_CertificateSpec(in *certmanag
 		return err
 	}
 	out.IsCA = in.IsCA
+	out.CertCaBundle = in.CertCaBundle
 	out.Usages = *(*[]v1.KeyUsage)(unsafe.Pointer(&in.Usages))
 	out.PrivateKey = (*v1.CertificatePrivateKey)(unsafe.Pointer(in.PrivateKey))
 	out.EncodeUsagesInRequest = (*bool)(unsafe.Pointer(in.EncodeUsagesInRequest))
